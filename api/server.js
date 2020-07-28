@@ -2,14 +2,17 @@ const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+require("dotenv").config();
 
 // express routers
 const usersRouter = require('../users/users-router.js');
 const authRouter = require('../auth/auth-router.js');
 const recipesRouter = require('../recipes/recipes-router.js');
+const categoriesRouter = require('../categories/categories-router')
 
 // server object
 const server = express();
+
 
 // global middleware
 server.use(helmet());
@@ -20,6 +23,7 @@ server.use(cookieParser());
 server.use('/api/users', usersRouter);
 server.use('/api/auth', authRouter);
 server.use('/api/recipes', recipesRouter);
+server.use('/api/categories', categoriesRouter)
 
 server.get("/", (req, res, next) => {
     res.json({
